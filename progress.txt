@@ -5,3 +5,8 @@ Learning about Object Modeling (breaking things down into parts and making them 
 "Making our ES6 modules usable in the browser" section - bundled my library so it will work in browsers
 Downloaded webpack-library-starter, changed the config files to the appropriate name I wanted for my library and
 gave it the path, then ran it and it packed it up for me
+-- So webpack-library-starter was weird - I had to put all my js files in the 'src' directory of the downloaded and
+    extracted ZIP file, and it had super stringent indentation, etc policies. But eventually, after i ran npm install
+    and npm build in the directory, it seems to have given me some libraries?
+
+installed browserify globally and bundled it by running the browserify main.js -o bundle.js
