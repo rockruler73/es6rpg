@@ -16,3 +16,4 @@ currently on "Now that we have an Inventory, we’ll finish building out Player 
 line 138 might be one bracket too far in in game.js
 
 ok it might be ready to go i just need to fix indents and stuff
+I NAMED IT ES6RPG.JS IN WEBPACK.CONFIG AT HOME THAT MIGHT MESS THINGS UP

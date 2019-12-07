@@ -39,6 +39,8 @@ startRoom.addPrompt(
     ['accessKey']
 );
 
+game.datapath = "https://www.caseyrock.com/converttojson.json";
+
 game.init();
 
 // Send user input to our game (on pressing 'Enter' in the form)
