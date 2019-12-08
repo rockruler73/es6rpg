@@ -3,7 +3,7 @@
 // we use "require" here, but browsers don't, so we have to use browserify to bundle up the code and dependencies
 //which will allow require() to work in the browser the same way it does in Node :D
 const game = require('./text-rpg-engine');
-
+/*
 // Add a room (by default will be beginning room since it was first added)
 const startRoom = game.addRoom('Beginning', 'This is the beginning room');
 // Add a second room (by default will be winning room since it was added last)
@@ -39,7 +39,7 @@ startRoom.addPrompt(
     // required items to successfully do prompt (optional)
     ['accessKey']
 );
-
+*/
 game.datapath = "https://www.caseyrock.com/converttojson.json";
 
 game.init();
@@ -57,11 +57,11 @@ document.getElementById('input').addEventListener('keypress', function (event) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
 	else if(typeof define === 'function' && define.amd)
-		define("text-rpg-engine.js", [], factory);
+		define("text-rpg-engine", [], factory);
 	else if(typeof exports === 'object')
-		exports["text-rpg-engine.js"] = factory();
+		exports["text-rpg-engine"] = factory();
 	else
-		root["text-rpg-engine.js"] = factory();
+		root["text-rpg-engine"] = factory();
 })(typeof self !== 'undefined' ? self : this, function() {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
@@ -261,6 +261,10 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -296,37 +300,83 @@ function () {
 
   _createClass(Game, [{
     key: "init",
-    value: function init() {
-      var displayText;
-      console.log('Initialized game from: ' + this.datapath);
-      this.loadData(this.datapath); // TODO: make games load from json data
-      // if game wasn't initalized with startRoom, set it to the first room
+    value: function () {
+      var _ref = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee() {
+        var displayText, rooms, i, _i;
 
-      if (this.startRoom === '' && this.rooms.length > 0) {
-        this.startRoom = this.rooms[0].name;
-        this.Player.startRoom = this.startRoom;
-        this.Player.currentRoom = this.Player.startRoom;
-      } // if game wasn't initalized with endRoom, set it to the first room
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                console.log('Initialized game from: ' + this.datapath);
+                _context.next = 3;
+                return this.loadData(this.datapath);
+
+              case 3:
+                rooms = _context.sent;
+
+                // TODO: make games load from json data
+                for (i = 0; i < rooms.length; i++) {
+                  this.addRoom(rooms[i].name, rooms[i].getText, rooms[i].prompts, rooms[i].requirements);
+                } // if game wasn't initalized with startRoom, set it to the first room
 
 
-      if (this.endRoom === '' && this.rooms.length > 0) {
-        this.endRoom = this.rooms[this.rooms.length - 1].name;
-      } // display the startRoom text
+                if (this.startRoom === '' && this.rooms.length > 0) {
+                  this.startRoom = this.rooms[0].name;
+                  this.Player.startRoom = this.startRoom;
+                  this.Player.currentRoom = this.Player.startRoom;
+                } // if game wasn't initalized with endRoom, set it to the last room
 
 
-      for (var i = 0; i < this.rooms.length; i++) {
-        if (this.rooms[i].name === this.startRoom) {
-          displayText = this.rooms[i].getText;
-          break;
-        }
+                if (this.endRoom === '' && this.rooms.length > 0) {
+                  this.endRoom = this.rooms[this.rooms.length - 1].name;
+                } // display the startRoom text
+
+
+                _i = 0;
+
+              case 8:
+                if (!(_i < this.rooms.length)) {
+                  _context.next = 15;
+                  break;
+                }
+
+                if (!(this.rooms[_i].name === this.startRoom)) {
+                  _context.next = 12;
+                  break;
+                }
+
+                displayText = this.rooms[_i].getText;
+                return _context.abrupt("break", 15);
+
+              case 12:
+                _i++;
+                _context.next = 8;
+                break;
+
+              case 15:
+                if (displayText === undefined) {
+                  displayText = 'No starting room text found';
+                }
+
+                this.Display.show(displayText);
+
+              case 17:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function init() {
+        return _ref.apply(this, arguments);
       }
 
-      if (displayText === undefined) {
-        displayText = 'No starting room text found';
-      }
-
-      this.Display.show(displayText);
-    } // manage rooms
+      return init;
+    }() // manage rooms
     // create a new Room object and push it onto the current rooms list
 
   }, {
@@ -481,13 +531,45 @@ function () {
 
   }, {
     key: "loadData",
-    value: function loadData(filepath) {
-      fetch(filepath).then(function (res) {
-        return res.json();
-      }).then(function (data) {
-        console.log(data);
-      });
-    }
+    value: function () {
+      var _ref2 = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee2(filepath) {
+        var rooms, response, data, i;
+        return regeneratorRuntime.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                rooms = [];
+                _context2.next = 3;
+                return fetch(filepath);
+
+              case 3:
+                response = _context2.sent;
+                _context2.next = 6;
+                return response.json();
+
+              case 6:
+                data = _context2.sent;
+
+                for (i = 0; i < data.rooms.length; i++) {
+                  rooms.push(data.rooms[i]);
+                }
+
+              case 8:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this);
+      }));
+
+      function loadData(_x) {
+        return _ref2.apply(this, arguments);
+      }
+
+      return loadData;
+    }()
   }]);
 
   return Game;

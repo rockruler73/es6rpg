@@ -23,18 +23,23 @@ export default class Game {
   }
 
   // Initializes the game
-  init() {
+  async init() {
     let displayText;
 
     console.log('Initialized game from: ' + this.datapath);
-    this.loadData(this.datapath); // TODO: make games load from json data
+    let rooms = await this.loadData(this.datapath);
+
+    for (let i = 0; i < rooms.length; i++) {
+      this.addRoom(rooms[i].name, rooms[i].getText, rooms[i].prompts, rooms[i].requirements);
+    }
+
     // if game wasn't initalized with startRoom, set it to the first room
     if (this.startRoom === '' && this.rooms.length > 0) {
       this.startRoom = this.rooms[0].name;
       this.Player.startRoom = this.startRoom;
       this.Player.currentRoom = this.Player.startRoom;
     }
-    // if game wasn't initalized with endRoom, set it to the first room
+    // if game wasn't initalized with endRoom, set it to the last room
     if (this.endRoom === '' && this.rooms.length > 0) {
       this.endRoom = this.rooms[this.rooms.length - 1].name;
     }
@@ -190,13 +195,17 @@ export default class Game {
   }
 
   // load from json file
-  loadData(filepath) {
-    fetch(filepath)
-      .then(
-        res => res.json()
-      )
-      .then(function (data) {
-        console.log(data);
-      });
+  async loadData(filepath) {
+    let rooms = [];
+
+    const response = await fetch(filepath);
+    const data = await response.json();
+
+    console.log(data);
+
+    for (let i = 0; i < data.rooms.length; i++) {
+      rooms.push(data.rooms[i]);
+    }
+    return rooms;
   }
 }

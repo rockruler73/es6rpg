@@ -2,7 +2,7 @@
 // we use "require" here, but browsers don't, so we have to use browserify to bundle up the code and dependencies
 //which will allow require() to work in the browser the same way it does in Node :D
 const game = require('./text-rpg-engine');
-
+/*
 // Add a room (by default will be beginning room since it was first added)
 const startRoom = game.addRoom('Beginning', 'This is the beginning room');
 // Add a second room (by default will be winning room since it was added last)
@@ -38,7 +38,7 @@ startRoom.addPrompt(
     // required items to successfully do prompt (optional)
     ['accessKey']
 );
-
+*/
 game.datapath = "https://www.caseyrock.com/converttojson.json";
 
 game.init();

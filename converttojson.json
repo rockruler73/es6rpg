@@ -1,22 +1,32 @@
 {
-    "game": {
-        "rooms":
-        [
-            {"name": "Beginning",
-                "getText": "This is the beginning room",
-                "prompts":
-                    [{"name": "look", "keywords": ["look room", "look at room", "search room", "examine room",
-                        "look in"],
-                    "results":
-                        {"successText": "You see a room with a door to the right and a statue in the middle."}},
-                    {"name": "Go right", "keywords": ["go right", "move right", "open right", "enter right",
-                    "door right", "right door"],
-                    "results":
-                        {"successText": "You enter in the access code \"14052\" and successfully open the door."},
-                        "failText": "The door is locked with an access code!", "roomToEnter": "secondRoom",
-                        "itemsGiven": "trophy"}
-            ]},
-            {"name": "SecondRoom", "getText": "You did it! You Won!"}
-        ]
-    }
+    "rooms":
+    [
+        {
+            "name": "Beginning",
+            "getText": "This is the beginning room",
+            "prompts":
+                [
+                    {
+                        "name": "look", "keywords": ["look room", "look at room", "search room", "examine room",
+                        "look in"], "results":
+                        {"successText": "You see a room with a door to the right and a statue in the middle."}
+                    },
+
+                    {
+                        "name": "Go right", "keywords": ["go right", "move right", "open right", "enter right",
+                        "door right", "right door"], "results":
+                            [
+                                {"successText": "You enter in the access code \"14052\" and successfully open the door."},
+                                {"failText": "The door is locked with an access code!"},
+                                {"roomToEnter": "secondRoom"},
+                                {"itemsGiven": "trophy"}
+                            ]
+                    }
+                ]
+        },
+        {
+            "name": "SecondRoom",
+            "getText": "You did it! You Won!"
+        }
+    ]
 }
