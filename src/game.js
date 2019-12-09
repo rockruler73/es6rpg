@@ -26,11 +26,27 @@ export default class Game {
   async init() {
     let displayText;
 
-    console.log('Initialized game from: ' + this.datapath);
     let rooms = await this.loadData(this.datapath);
 
     for (let i = 0; i < rooms.length; i++) {
-      this.addRoom(rooms[i].name, rooms[i].getText, rooms[i].prompts, rooms[i].requirements);
+      this.addRoom(rooms[i].name, rooms[i].getText);
+
+      for (let j = 0; j < rooms[i].prompts.length; j++) {
+        if (!rooms[i].prompts[j].name) {
+          rooms[i].prompts[j].name = '';
+        }
+        if (!rooms[i].prompts[j].keywords) {
+          rooms[i].prompts[j].keywords = [];
+        }
+        if (!rooms[i].prompts[j].results) {
+          rooms[i].prompts[j].results = {};
+        }
+        if (!rooms[i].prompts[j].requirements) {
+          rooms[i].prompts[j].requirements = [];
+        }
+        this.rooms[i].addPrompt(rooms[i].prompts[j].name, rooms[i].prompts[j].keywords,
+          rooms[i].prompts[j].results, rooms[i].prompts[j].requirements);
+      }
     }
 
     // if game wasn't initalized with startRoom, set it to the first room
@@ -62,7 +78,7 @@ export default class Game {
 
   // create a new Room object and push it onto the current rooms list
   addRoom(name, getText, prompts = [], requirements = []) {
-    let roomObj = new Room(name, getText, prompts, requirements);
+    let roomObj = new Room(name, getText, requirements, prompts);
 
     this.rooms.push(roomObj);
     return roomObj;
@@ -154,7 +170,6 @@ export default class Game {
       _this.Display.show(`<p>There doesn't seem to be any actions at all that you can do in this room.</p>
       ${_this.getRoom(_this.Player.currentRoom).getText}`);
     }
-    console.log(message, this.Player);
   }
 
   // Grab the message from the user and run Input.send on it
@@ -201,9 +216,10 @@ export default class Game {
     const response = await fetch(filepath);
     const data = await response.json();
 
-    console.log(data);
-
     for (let i = 0; i < data.rooms.length; i++) {
+      if (!data.rooms[i].prompts) {
+        data.rooms[i].prompts = [];
+      }
       rooms.push(data.rooms[i]);
     }
     return rooms;

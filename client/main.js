@@ -1,7 +1,8 @@
-//require the game library in the client
+"use strict"; //require the game library in the client
 // we use "require" here, but browsers don't, so we have to use browserify to bundle up the code and dependencies
 //which will allow require() to work in the browser the same way it does in Node :D
-const game = require('./text-rpg-engine');
+
+var game = require('./text-rpg-engine');
 /*
 // Add a room (by default will be beginning room since it was first added)
 const startRoom = game.addRoom('Beginning', 'This is the beginning room');
@@ -39,15 +40,15 @@ startRoom.addPrompt(
     ['accessKey']
 );
 */
+
+
 game.datapath = "https://www.caseyrock.com/converttojson.json";
+game.init(); // Send user input to our game (on pressing 'Enter' in the form)
 
-game.init();
-
-// Send user input to our game (on pressing 'Enter' in the form)
 document.getElementById('input').addEventListener('keypress', function (event) {
-    if (event.key === "Enter") {
-        event.preventDefault();
-        game.userSend(document.getElementById('input').value);
-        document.getElementById('input').value = '';
-    }
+  if (event.key === "Enter") {
+    event.preventDefault();
+    game.userSend(document.getElementById('input').value);
+    document.getElementById('input').value = '';
+  }
 });
