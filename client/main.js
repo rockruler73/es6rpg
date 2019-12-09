@@ -42,7 +42,7 @@ startRoom.addPrompt(
 */
 
 
-game.datapath = "https://www.caseyrock.com/converttojson.json";
+game.datapath = "https://www.caseyrock.com/caseyrockdotcom.json";
 game.init(); // Send user input to our game (on pressing 'Enter' in the form)
 
 document.getElementById('input').addEventListener('keypress', function (event) {

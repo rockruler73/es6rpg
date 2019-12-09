@@ -143,7 +143,7 @@ export default class Game {
                 if (enterRoomResultSuccess) {
                   // Check to see if player entered winning room
                   if (matchingPromptResults.success.roomToEnter === _this.endRoom) {
-                    _this.win();
+                    // _this.win();
                   }
                 } else {
                   // Player could not enter room (missing required items in inventory)

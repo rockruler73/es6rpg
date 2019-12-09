@@ -25,6 +25,6 @@ export default class Display {
 
   // append HTML to display screen
   append(html) {
-    document.getElementById(this.elementId).innerHtml += html;
+    document.getElementById(this.elementId).innerHTML += html;
   }
 }
