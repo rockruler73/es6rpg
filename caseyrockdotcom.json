@@ -3,7 +3,7 @@
   [
     {
       "name": "beginning",
-      "getText": "You find yourself in a long hallway, warmly lit by bulbs lining the walls. Small signs hang above open doorways. <br />You see:<br />TOYBOX<br />OFFICE<br />WORKSHOP<br /><i>[Enter rooms by typing 'enter', and then the room you'd like to enter. Look at things by typing 'examine'. Pick things up by typing 'pick'. (Pickables will glow.)]<br />[If you get lost, type 'go back' and you'll find yourself back here.]</i>",
+      "getText": "You find yourself in a long hallway, warmly lit by bulbs lining the walls. Small signs hang above open doorways. <br />You see:<br />TOY ROOM<br />OFFICE<br />WORKSHOP<br /><i>[Enter rooms by typing 'enter', and then the room you'd like to enter. Look at things by typing 'examine'. Pick things up by typing 'pick'. (Pickables will glow, though finding them all might take some examining...)]<br />[If you get lost, type 'go back' and you'll find yourself back here.]</i>",
       "prompts":
       [
         {
@@ -23,6 +23,28 @@
             "successText": "You enter the workshop.",
             "failText": "The door is locked with an access code!",
             "roomToEnter": "workshop"
+          }
+        },
+
+        {
+          "name": "enter toyroom",
+          "keywords": ["enter toy room"],
+          "results":
+          {
+            "successText": "You enter the toy room.",
+            "failText": "The door is locked with an access code!",
+            "roomToEnter": "toyroom"
+          }
+        },
+
+        {
+          "name": "enter office",
+          "keywords": ["enter office"],
+          "results":
+          {
+            "successText": "You enter the office.",
+            "failText": "The door is locked with an access code!",
+            "roomToEnter": "office"
           }
         },
 
@@ -81,7 +103,39 @@
           "keywords": ["go back"],
           "results":
           {
-            "successText": "You go back.",
+            "successText": "You exit the workshop and return to the hallway.",
+            "roomToEnter": "beginning"
+          }
+        }
+      ]
+    },
+    {
+      "name": "toyroom",
+      "getText": "Toys litter the floor, and in the center of the room is a massive toy chest.<br />Some of the toys are worn to near unrecognizability; some are barely used, especially the poor guitar, ukulele, and harmonica; some look like they are only half-made.<br />A plaque with some writing hangs on the opposite wall.",
+      "prompts":
+      [
+        {
+          "name": "go back",
+          "keywords": ["go back"],
+          "results":
+          {
+            "successText": "You exit the toy room and return to the hallway.",
+            "roomToEnter": "beginning"
+          }
+        }
+      ]
+    },
+    {
+      "name": "office",
+      "getText": "It's pretty messy, but the hanging sign that says 'DO NOT CLEAN' makes you think there might be some inexplicable internal logic.<br />You see a small hand-bound leather book among the junk on the desks. It glows in a pale purple light.",
+      "prompts":
+      [
+        {
+          "name": "go back",
+          "keywords": ["go back"],
+          "results":
+          {
+            "successText": "You exit the office and return to the hallway.",
             "roomToEnter": "beginning"
           }
         }
