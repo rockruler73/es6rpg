@@ -22,11 +22,51 @@
                         {
                             "successText": "You enter in the access code \"14052\" and successfully open the door.",
                             "failText": "The door is locked with an access code!",
-                            "roomToEnter": "secondRoom",
+                            "roomToEnter": "SecondRoom",
                             "itemsGiven": "trophy"
                         },
                         "requirements":
                                 ["AccessKey"]
+                    },
+
+                    {
+                        "name": "Get Statue",
+                        "keywords": ["get statue", "pick up statue", "take statue", "pick statue"],
+                        "results":
+                        {
+                            "successText": "You pick up the statue. It feels heavy in your hands, and there's something hanging off the bottom.",
+                            "itemsGiven":
+                            [
+                                "statue"
+                            ]
+                        }
+                    },
+
+                    {
+                        "name": "Rotate Statue",
+                        "keywords": ["turn statue", "turn statue over", "flip statue", "rotate statue", "flip statue over"],
+                        "results":
+                        {
+                            "successText": "You take the note from the bottom of the statue.",
+                            "failText": "You have statue to flip!",
+                            "itemsGiven":
+                                    [
+                                        "note"
+                                    ]
+                        },
+                        "requirements": ["statue"]
+                    },
+
+                    {
+                        "name": "Look at note",
+                        "keywords": ["look at note", "read note", "look note", "check note", "get note", "examine note"],
+                        "results":
+                        {
+                            "successText": "You look at the note and find an access code: '14052.'",
+                            "failText": "You have no note to look at!",
+                            "itemsGiven": "AccessKey"
+                        },
+                        "requirements": ["statue", "note"]
                     }
                 ]
         },
